@@ -1,0 +1,38 @@
+﻿/*
+**本类代码由代码生成器自动生成，可以根据需要修改
+**生成时间：@DateTime.Now
+**Toolkit.WinForm.ApiDesign.Model.ApiInterfaceInfo
+*/
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using AdminFrameWork.Constant;
+using AdminFrameWork.Mvc;
+using Microsoft.AspNetCore.Mvc;
+using AdminFrameWork.RepositoryPattern;
+using Microsoft.AspNetCore.Http;
+using @(Model.Project.Namespace).ViewModel.@Model.ApiCode;
+
+namespace {Namespace}
+{
+
+    public partial class @(Model.ApiCode)Controller : Controller
+    {
+        [HttpGet("@Model.ActionRoute")]
+        public @(Model.ActionName)ResponseModel @(Model.ActionName)(@(Model.ActionName)RequestModel request)
+        {
+            try
+            {
+                return new @(Model.ActionName)ResponseModel() { Status = AjaxStatus.Normal };
+            }
+            catch (Exception)
+            {
+                return new @(Model.ActionName)ResponseModel() { Status = AjaxStatus.Error, Message = "服务器繁忙，请稍后重试！" };
+            }
+        }
+    }
+}

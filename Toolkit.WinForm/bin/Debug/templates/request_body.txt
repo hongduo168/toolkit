@@ -1,0 +1,29 @@
+﻿/*
+**本类代码由代码生成器自动生成，请勿手动修改，如需修改，请添加同名partial class
+**生成时间：@DateTime.Now
+*/
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using AdminFrameWork.Mvc;
+
+namespace {Namespace}
+{
+    public partial class @(Model.ActionName)RequestModel : AjaxRequest
+    {
+		@foreach (var item in Model.RequestBodys) 
+		{
+			if(string.IsNullOrEmpty(item.FieldCode) || string.IsNullOrEmpty(item.DataType)) {
+				continue;
+			}
+			@:/// <summary>
+			@:/// @item.FieldName
+			@:/// </summary>
+			@:/// <value></value>
+			@:public @item.DataType @item.FieldCode { get; set; }
+			@:
+		}
+    }
+}
