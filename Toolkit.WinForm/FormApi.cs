@@ -68,12 +68,21 @@ namespace Toolkit.WinForm
                 this.chkBool.Checked = false;
                 this.chkInt.Checked = false;
                 this.chkList.Checked = false;
+                this.tbActionMethod.SelectedIndex = 0;
             }
             else
             {
                 this.tbName.Text = this.ApiData.ApiName;
                 this.tbApiCode.Text = this.ApiData.ApiCode;
                 this.tbActionName.Text = this.ApiData.ActionName;
+                if (string.IsNullOrEmpty(this.ApiData.ActionMethod))
+                {
+                    this.tbActionMethod.SelectedIndex = 0;
+                }
+                else
+                {
+                    this.tbActionMethod.SelectedItem = this.ApiData.ActionMethod;
+                }
                 this.tbRoute.Text = this.ApiData.ActionRoute;
 
                 this.chkBool.Checked = this.ApiData.IsResultBool;
@@ -269,6 +278,7 @@ namespace Toolkit.WinForm
             this.ApiData.ApiName = tbName.Text.Trim();
             this.ApiData.ApiCode = tbApiCode.Text.Trim();
             this.ApiData.ActionName = tbActionName.Text.Trim();
+            this.ApiData.ActionMethod = tbActionMethod.Text.Trim();
             this.ApiData.ActionRoute = tbRoute.Text.Trim();
 
             this.ApiData.IsResultBool = chkBool.Checked;
@@ -281,6 +291,7 @@ namespace Toolkit.WinForm
             if (this.ApiData.ApiName == null) this.ApiData.ApiName = string.Empty;
             if (this.ApiData.ApiCode == null) this.ApiData.ApiCode = string.Empty;
             if (this.ApiData.ActionName == null) this.ApiData.ActionName = string.Empty;
+            if (this.ApiData.ActionMethod == null) this.ApiData.ActionMethod = string.Empty;
             if (this.ApiData.ActionRoute == null) this.ApiData.ActionRoute = string.Empty;
 
             if (string.IsNullOrWhiteSpace(this.ApiData.SID))

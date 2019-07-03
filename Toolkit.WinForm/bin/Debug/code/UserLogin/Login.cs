@@ -1,7 +1,6 @@
 /*
 **本类代码由代码生成器自动生成，可以根据需要修改
-**生成时间：2019/7/3 15:29:25
-**Toolkit.WinForm.ApiDesign.Model.ApiInterfaceInfo
+**生成时间：2019/7/3 16:06:05
 */
 
 
@@ -22,7 +21,9 @@ namespace Plugin.App.Controllers.v1
 
     public partial class UserController : Controller
     {
-        [HttpGet("login")]
+
+
+		[HttpPost("login")]
         public LoginResponseModel Login(LoginRequestModel request)
         {
             try

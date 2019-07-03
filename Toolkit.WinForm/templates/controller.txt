@@ -21,7 +21,24 @@ namespace {Namespace}
 
     public partial class @(Model.ApiCode)Controller : Controller
     {
-        [HttpGet("@Model.ActionRoute")]
+		@{
+			var actionMethod = "HttpGet";
+			switch(Model.ActionMethod) {
+				case "DELETE":
+					actionMethod = "HttpDelete";
+					break;
+				case "PUT":
+					actionMethod = "HttpPut";
+					break;
+				case "POST":
+					actionMethod = "HttpPost";
+					break;
+				default:
+					break;
+			}
+		}
+
+		[@(actionMethod)("@Model.ActionRoute")]
         public @(Model.ActionName)ResponseModel @(Model.ActionName)(@(Model.ActionName)RequestModel request)
         {
             try

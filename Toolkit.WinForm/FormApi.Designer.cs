@@ -52,6 +52,8 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.tbApiCode = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.tbActionMethod = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRequsetBody)).BeginInit();
@@ -310,11 +312,36 @@
             this.label4.TabIndex = 22;
             this.label4.Text = "接口标识：";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(543, 16);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(65, 12);
+            this.label5.TabIndex = 24;
+            this.label5.Text = "访问方式：";
+            // 
+            // tbActionMethod
+            // 
+            this.tbActionMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.tbActionMethod.FormattingEnabled = true;
+            this.tbActionMethod.Items.AddRange(new object[] {
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE"});
+            this.tbActionMethod.Location = new System.Drawing.Point(612, 12);
+            this.tbActionMethod.Name = "tbActionMethod";
+            this.tbActionMethod.Size = new System.Drawing.Size(121, 20);
+            this.tbActionMethod.TabIndex = 25;
+            // 
             // FormApi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 467);
+            this.Controls.Add(this.tbActionMethod);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.tbApiCode);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnSave);
@@ -366,5 +393,7 @@
         private System.Windows.Forms.CheckBox chkList;
         private System.Windows.Forms.TextBox tbApiCode;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox tbActionMethod;
     }
 }

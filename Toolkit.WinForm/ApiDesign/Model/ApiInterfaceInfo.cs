@@ -33,6 +33,8 @@ namespace Toolkit.WinForm.ApiDesign.Model
         /// </summary>
         public string ActionName { get; set; }
 
+        public string ActionMethod { get; set; }
+
         /// <summary>
         /// 生成的URL后缀
         /// </summary>
