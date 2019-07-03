@@ -150,6 +150,9 @@
     <Content Include="templates\constructor.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="templates\js-service.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="templates\request_body.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

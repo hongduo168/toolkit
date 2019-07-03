@@ -20,3 +20,4 @@ Y:\Documents\GitLab\Toolkit\Toolkit.WinForm\bin\Debug\templates\request_body.txt
 Y:\Documents\GitLab\Toolkit\Toolkit.WinForm\bin\Debug\templates\response_body.txt
 Y:\Documents\GitLab\Toolkit\Toolkit.WinForm\bin\Debug\templates\controller.txt
 Y:\Documents\GitLab\Toolkit\Toolkit.WinForm\bin\Debug\templates\constructor.txt
+Y:\Documents\GitLab\Toolkit\Toolkit.WinForm\bin\Debug\templates\js-service.txt

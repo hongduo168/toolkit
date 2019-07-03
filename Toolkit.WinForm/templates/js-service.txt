@@ -1,0 +1,12 @@
+﻿/*
+**本类代码由代码生成器自动生成，请勿手动修改，如需修改，请添加同名partial class
+**生成时间：@DateTime.Now
+*/
+
+import request from "./request";
+
+@foreach(var item in Model.ApiInterfaces){
+@:export async function @item.ApiCode.ToLower()@(item.ActionName)() {
+  @:return @(item.ActionMethod.ToLower())("/api/@item.ApiCode/@item.ActionRoute");
+@:}
+}

@@ -44,9 +44,8 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCreateSelected = new System.Windows.Forms.Button();
             this.btnCreateAll = new System.Windows.Forms.Button();
-            this.pbCreate = new System.Windows.Forms.ProgressBar();
-            this.lblProgress = new System.Windows.Forms.Label();
             this.btnDelete = new System.Windows.Forms.Button();
+            this.btnCreateJSService = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
@@ -225,27 +224,6 @@
             this.btnCreateAll.UseVisualStyleBackColor = true;
             this.btnCreateAll.Click += new System.EventHandler(this.BtnCreateAll_Click);
             // 
-            // pbCreate
-            // 
-            this.pbCreate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbCreate.Location = new System.Drawing.Point(641, 121);
-            this.pbCreate.Name = "pbCreate";
-            this.pbCreate.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.pbCreate.Size = new System.Drawing.Size(95, 10);
-            this.pbCreate.TabIndex = 12;
-            this.pbCreate.Visible = false;
-            // 
-            // lblProgress
-            // 
-            this.lblProgress.AutoSize = true;
-            this.lblProgress.Location = new System.Drawing.Point(639, 108);
-            this.lblProgress.Name = "lblProgress";
-            this.lblProgress.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblProgress.Size = new System.Drawing.Size(35, 12);
-            this.lblProgress.TabIndex = 13;
-            this.lblProgress.Text = "label";
-            this.lblProgress.Visible = false;
-            // 
             // btnDelete
             // 
             this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -258,13 +236,24 @@
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
+            // btnCreateJSService
+            // 
+            this.btnCreateJSService.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCreateJSService.Location = new System.Drawing.Point(642, 187);
+            this.btnCreateJSService.Name = "btnCreateJSService";
+            this.btnCreateJSService.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnCreateJSService.Size = new System.Drawing.Size(95, 23);
+            this.btnCreateJSService.TabIndex = 14;
+            this.btnCreateJSService.Text = "生成JSService";
+            this.btnCreateJSService.UseVisualStyleBackColor = true;
+            this.btnCreateJSService.Click += new System.EventHandler(this.BtnCreateJSService_Click);
+            // 
             // FormProjectInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(749, 579);
-            this.Controls.Add(this.lblProgress);
-            this.Controls.Add(this.pbCreate);
+            this.Controls.Add(this.btnCreateJSService);
             this.Controls.Add(this.btnCreateSelected);
             this.Controls.Add(this.btnCreateAll);
             this.Controls.Add(this.btnSave);
@@ -304,9 +293,8 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCreateSelected;
         private System.Windows.Forms.Button btnCreateAll;
-        private System.Windows.Forms.ProgressBar pbCreate;
-        private System.Windows.Forms.Label lblProgress;
         private System.Windows.Forms.Button btnCreate;
         private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnCreateJSService;
     }
 }

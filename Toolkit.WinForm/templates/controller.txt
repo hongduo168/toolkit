@@ -36,18 +36,20 @@ namespace {Namespace}
 				default:
 					break;
 			}
+
+			var responseType = @Model.ActionName + "ResponseModel";
 		}
 
 		[@(actionMethod)("@Model.ActionRoute")]
-        public @(Model.ActionName)ResponseModel @(Model.ActionName)(@(Model.ActionName)RequestModel request)
+        public @responseType @(Model.ActionName)(@(Model.ActionName)RequestModel request)
         {
             try
             {
-                return new @(Model.ActionName)ResponseModel() { Status = AjaxStatus.Normal };
+                return new @(responseType)() { Status = AjaxStatus.Normal };
             }
             catch (Exception)
             {
-                return new @(Model.ActionName)ResponseModel() { Status = AjaxStatus.Error, Message = "服务器繁忙，请稍后重试！" };
+                return new @(responseType)() { Status = AjaxStatus.Error, Message = "服务器繁忙，请稍后重试！" };
             }
         }
     }

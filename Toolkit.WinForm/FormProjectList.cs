@@ -24,6 +24,9 @@ namespace Toolkit.WinForm
 
         private Dictionary<string, Form> openedForms = new Dictionary<string, Form>();
 
+
+        private MDIMain MDIMain => this.ParentForm as MDIMain;
+
         internal void InitializeData()
         {
             ProjectData = DataProvider.Instance().GetProject();

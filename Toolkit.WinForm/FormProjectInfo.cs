@@ -27,6 +27,8 @@ namespace Toolkit.WinForm
             LoadData(sid);
         }
 
+        private MDIMain MDIMain => this.ParentForm as MDIMain;
+
         System.Threading.Thread thread;
 
         public ProjectInfo Project { get; set; }
@@ -119,6 +121,121 @@ namespace Toolkit.WinForm
             foundId = new List<int>();
         }
 
+
+        private delegate void CreateCSharpCodeCallback(List<ApiInterfaceInfo> apiInterfaces);
+        private void BtnCreateSelected_Click(object sender, EventArgs e)
+        {
+            if (this.lbApi.SelectedIndex < 0)
+            {
+                MessageBox.Show("请选择需要生成的接口");
+                return;
+            }
+
+            thread = new System.Threading.Thread(new System.Threading.ThreadStart(() =>
+            {
+                List<ApiInterfaceInfo> list = new List<ApiInterfaceInfo>();
+
+                foreach (ApiInterfaceInfo item in this.lbApi.SelectedItems)
+                {
+                    list.Add(item);
+                }
+
+                CreateCSharpCodeCallback cb = new CreateCSharpCodeCallback(BuildCSharpCode);
+                this.Invoke(cb, list);
+                thread.Abort();
+
+            }));
+
+            thread.IsBackground = true;
+            thread.Start();
+        }
+
+        private void BtnCreateAll_Click(object sender, EventArgs e)
+        {
+            thread = new System.Threading.Thread(new System.Threading.ThreadStart(() =>
+            {
+                CreateCSharpCodeCallback cb = new CreateCSharpCodeCallback(BuildCSharpCode);
+                this.Invoke(cb, this.Project.ApiInterfaces);
+                thread.Abort();
+            }));
+
+            thread.IsBackground = true;
+            thread.Start();
+        }
+
+
+        private void BtnCreate_Click(object sender, EventArgs e)
+        {
+            var formSID = nameof(FormApi);
+
+            if (!openedForms.ContainsKey(formSID))
+            {
+                var form = new FormApi(this.Project, this);
+                form.FormClosed += new FormClosedEventHandler(Form_FormClosed);
+                form.MdiParent = this.ParentForm;
+
+                openedForms[formSID] = form;
+                openedForms[formSID].Show();
+            }
+
+        }
+
+        private void LbApi_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.lbApi.SelectedIndex < 0) return;
+            var apiData = (ApiInterfaceInfo)this.lbApi.Items[this.lbApi.SelectedIndex];
+
+            if (!openedForms.ContainsKey(apiData.SID))
+            {
+                var form = new FormApi(this.Project, this, apiData);
+                form.FormClosed += new FormClosedEventHandler(Form_FormClosed);
+                form.MdiParent = this.MdiParent;
+
+                openedForms[apiData.SID] = form;
+                openedForms[apiData.SID].Show();
+            }
+        }
+
+
+        #region generate code
+
+        private void BuildCSharpCode(List<ApiInterfaceInfo> apiInterfaces)
+        {
+            this.HandleButtonBeforeCreate();
+
+
+            if (this.MDIMain != null)
+            {
+                this.MDIMain.toolStripProgressBar1.Minimum = 0;
+                this.MDIMain.toolStripProgressBar1.Maximum = apiInterfaces.Count();
+            }
+            var index = 1;
+            //var o = new ParallelOptions();
+            //o.MaxDegreeOfParallelism = Environment.ProcessorCount;
+            //System.Threading.Tasks.Parallel.ForEach(apiInterfaces, o, (apiData) =>
+            //{
+
+            //});
+
+            foreach (var item in apiInterfaces)
+            {
+
+                if (this.MDIMain != null)
+                {
+                    this.MDIMain.toolStripProgressBar1.Value = index;
+                    this.MDIMain.toolStripStatusLabel1.Text = string.Format("{0}/{1},生成[{2}]", index++, apiInterfaces.Count(), item.ApiName);
+                }
+                this.GenerateController(item);
+            }
+
+            this.HandleButtonAfterCreate();
+        }
+
+
+        /// <summary>
+        /// generate csharp code
+        /// </summary>
+        /// <param name="apiData"></param>
         private void GenerateController(ApiInterfaceInfo apiData)
         {
             try
@@ -167,103 +284,58 @@ namespace Toolkit.WinForm
 
         }
 
-        private delegate void CreateCallBack(List<ApiInterfaceInfo> apiInterfaces);
-        private void BtnCreateSelected_Click(object sender, EventArgs e)
+        /// <summary>
+        /// generate js code
+        /// </summary>
+        /// <param name="apiData"></param>
+        private void GenerateJSService(ProjectInfo project)
         {
-            if (this.lbApi.SelectedIndex < 0)
+            try
             {
-                MessageBox.Show("请选择需要生成的接口");
-                return;
+                this.HandleButtonBeforeCreate();
+
+                //创建JS Service
+                var razor = new TemplateBuilder<object>(
+                    AppDomain.CurrentDomain.BaseDirectory + "/templates/js-service.txt",
+                    project,
+                    string.Empty,
+                    (project.Namespace.ToLower().Replace(".", "_") + "_service.js"));
+                razor.Render();
+
+                this.HandleButtonAfterCreate();
             }
-
-            thread = new System.Threading.Thread(new System.Threading.ThreadStart(() =>
+            catch (Exception ex)
             {
-                foreach (ApiInterfaceInfo item in this.lbApi.SelectedItems)
-                {
-                    this.GenerateController(item);
-                }
-                thread.Abort();
-            }));
-
-            thread.IsBackground = true;
-            thread.Start();
+                MessageBox.Show(ex.Message + Environment.NewLine + ex.ToString());
+                //Application.Exit();
+            }
         }
 
-        private void BtnCreateAll_Click(object sender, EventArgs e)
-        {
-            thread = new System.Threading.Thread(new System.Threading.ThreadStart(() =>
-            {
-                CreateCallBack cb = new CreateCallBack(BuildCode);
-                this.Invoke(cb, this.Project.ApiInterfaces);
-                thread.Abort();
-            }));
 
-            thread.IsBackground = true;
-            thread.Start();
-        }
-
-        private void BuildCode(List<ApiInterfaceInfo> apiInterfaces)
+        private void HandleButtonBeforeCreate()
         {
             this.btnCreateSelected.Enabled = this.btnCreateSelected.Visible = false;
+            this.btnCreateJSService.Enabled = this.btnCreateJSService.Visible = false;
             this.btnCreateAll.Enabled = this.btnCreateAll.Visible = false;
-            this.lblProgress.Visible = this.pbCreate.Visible = true;
-
-
-            this.pbCreate.Minimum = 0;
-            this.pbCreate.Maximum = this.Project.ApiInterfaces.Count();
-            var index = 1;
-            //var o = new ParallelOptions();
-            //o.MaxDegreeOfParallelism = Environment.ProcessorCount;
-            //System.Threading.Tasks.Parallel.ForEach(apiInterfaces, o, (apiData) =>
-            //{
-
-            //});
-
-            foreach (var item in apiInterfaces)
+            if (this.ParentForm is MDIMain)
             {
-                this.pbCreate.Value = index;
-                this.lblProgress.Text = "生成" + item.ApiName + "," + (index++) + "/" + this.Project.ApiInterfaces.Count();
-
-                this.GenerateController(item);
+                (this.ParentForm as MDIMain).toolStripProgressBar1.Visible = true;
+                (this.ParentForm as MDIMain).toolStripStatusLabel1.Visible = true;
             }
+        }
 
+        private void HandleButtonAfterCreate()
+        {
             this.btnCreateAll.Enabled = this.btnCreateAll.Visible = true;
+            this.btnCreateJSService.Enabled = this.btnCreateJSService.Visible = true;
             this.btnCreateSelected.Enabled = this.btnCreateSelected.Visible = true;
-            this.lblProgress.Visible = this.pbCreate.Visible = false;
-        }
-
-        private void BtnCreate_Click(object sender, EventArgs e)
-        {
-            var formSID = nameof(FormApi);
-
-            if (!openedForms.ContainsKey(formSID))
+            if (this.MDIMain != null)
             {
-                var form = new FormApi(this.Project, this);
-                form.FormClosed += new FormClosedEventHandler(Form_FormClosed);
-                form.MdiParent = this.ParentForm;
-
-                openedForms[formSID] = form;
-                openedForms[formSID].Show();
-            }
-
-        }
-
-        private void LbApi_DoubleClick(object sender, EventArgs e)
-        {
-            if (this.lbApi.SelectedIndex < 0) return;
-            var apiData = (ApiInterfaceInfo)this.lbApi.Items[this.lbApi.SelectedIndex];
-
-            if (!openedForms.ContainsKey(apiData.SID))
-            {
-                var form = new FormApi(this.Project, this, apiData);
-                form.FormClosed += new FormClosedEventHandler(Form_FormClosed);
-                form.MdiParent = this.MdiParent;
-
-                openedForms[apiData.SID] = form;
-                openedForms[apiData.SID].Show();
+                this.MDIMain.toolStripProgressBar1.Visible = false;
+                this.MDIMain.toolStripStatusLabel1.Visible = false;
             }
         }
-
+        #endregion
 
         #region form closed
         private void Form_FormClosed(Object sender, FormClosedEventArgs e)
@@ -296,6 +368,20 @@ namespace Toolkit.WinForm
             }
 
 
+        }
+
+        private delegate void CreateJSServiceCallback(ProjectInfo project);
+        private void BtnCreateJSService_Click(object sender, EventArgs e)
+        {
+            thread = new System.Threading.Thread(new System.Threading.ThreadStart(() =>
+            {
+                CreateJSServiceCallback cb = new CreateJSServiceCallback(GenerateJSService);
+                this.Invoke(cb, this.Project);
+                thread.Abort();
+            }));
+
+            thread.IsBackground = true;
+            thread.Start();
         }
     }
 }
