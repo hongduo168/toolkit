@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Toolkit.WinForm.ApiDesign;
@@ -22,7 +23,6 @@ namespace Toolkit.WinForm
         public FormProjectInfo(string sid, Form opener)
         {
             InitializeComponent();
-            //CheckForIllegalCrossThreadCalls = false;
             this.openerForm = opener;
             LoadData(sid);
         }
@@ -292,7 +292,6 @@ namespace Toolkit.WinForm
         {
             try
             {
-                this.HandleButtonBeforeCreate();
 
                 //创建JS Service
                 var razor = new TemplateBuilder<object>(
@@ -302,7 +301,6 @@ namespace Toolkit.WinForm
                     (project.Namespace.ToLower().Replace(".", "_") + "_service.js"));
                 razor.Render();
 
-                this.HandleButtonAfterCreate();
             }
             catch (Exception ex)
             {
@@ -382,6 +380,24 @@ namespace Toolkit.WinForm
 
             thread.IsBackground = true;
             thread.Start();
+
+            #region 进度条
+
+            if (this.MDIMain != null)
+            {
+                this.MDIMain.toolStripProgressBar1.Value = 0;
+                this.HandleButtonBeforeCreate();
+                for (int i = 0; i < this.MDIMain.toolStripProgressBar1.Maximum; i++)
+                {
+                    this.MDIMain.toolStripProgressBar1.Value++;
+                    this.MDIMain.toolStripStatusLabel1.Text = string.Empty;
+                    Thread.Sleep((2000 / this.MDIMain.toolStripProgressBar1.Maximum));
+                }
+                this.HandleButtonAfterCreate();
+            }
+
+            #endregion
+
         }
     }
 }

@@ -1,4 +1,3 @@
-Y:\Documents\GitLab\Toolkit\Toolkit.WinForm\obj\Debug\Toolkit.WinForm.csprojAssemblyReference.cache
 Y:\Documents\GitLab\Toolkit\Toolkit.WinForm\obj\Debug\Toolkit.WinForm.csproj.CoreCompileInputs.cache
 Y:\Documents\GitLab\Toolkit\Toolkit.WinForm\bin\Debug\Toolkit.WinForm.exe.config
 Y:\Documents\GitLab\Toolkit\Toolkit.WinForm\bin\Debug\Toolkit.WinForm.exe

@@ -65,7 +65,7 @@ namespace Toolkit.WinForm.ApiDesign
 
             if (result != null)
             {
-                result.ApiInterfaces = db.Query<ApiInterfaceInfo>("WHERE ProjectSID=@0 ", id).ToList();
+                result.ApiInterfaces = db.Query<ApiInterfaceInfo>("WHERE ProjectSID=@0 ", id).OrderBy(x => x.ApiName).ToList();
                 foreach (var detail in result.ApiInterfaces)
                 {
                     detail.RequestBodys = db.Query<RequestBodyInfo>("WHERE RelationSID=@0 ", detail.SID).ToList();
