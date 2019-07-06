@@ -102,7 +102,7 @@ namespace Toolkit.WinForm
 
         private void BindRequestBody()
         {
-            if (this.ApiData.RequestBodys != null && this.ApiData.ResponseBodys.Count > 0)
+            if (this.ApiData.RequestBodys != null && this.ApiData.RequestBodys.Count > 0)
             {
                 this.dgvRequsetBody.DataSource = null;
                 this.dgvRequsetBody.DataSource = this.ApiData.RequestBodys;
