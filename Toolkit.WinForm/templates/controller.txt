@@ -23,6 +23,7 @@ namespace {Namespace}
     {
 		@{
 			var actionMethod = "HttpGet";
+			var paramsFrom = "";
 			switch(Model.ActionMethod) {
 				case "DELETE":
 					actionMethod = "HttpDelete";
@@ -34,6 +35,7 @@ namespace {Namespace}
 					actionMethod = "HttpPost";
 					break;
 				default:
+					paramsFrom = "[FromQuery]";
 					break;
 			}
 
@@ -41,7 +43,7 @@ namespace {Namespace}
 		}
 
 		[@(actionMethod)("@Model.ActionRoute")]
-        public @responseType @(Model.ActionName)(@(Model.ActionName)RequestModel request)
+        public @responseType @(Model.ActionName)(@paramsFrom@(Model.ActionName)RequestModel request)
         {
             try
             {

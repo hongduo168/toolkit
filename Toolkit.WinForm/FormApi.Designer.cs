@@ -263,7 +263,7 @@
             this.btnPasteResponse.TabIndex = 15;
             this.btnPasteResponse.Text = "粘贴";
             this.btnPasteResponse.UseVisualStyleBackColor = true;
-            this.btnPasteResponse.Click += new System.EventHandler(this.BtnPasteResponse_Click_1);
+            this.btnPasteResponse.Click += new System.EventHandler(this.btnPasteResponse_Click);
             // 
             // btnRemoveResponseBody
             // 

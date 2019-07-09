@@ -184,7 +184,6 @@ namespace Toolkit.WinForm
 
             string[] lines = pasteText.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
 
-
             foreach (var line in lines)
             {
                 var arr = line.Split(new string[] { "\t" }, StringSplitOptions.RemoveEmptyEntries);
@@ -227,35 +226,6 @@ namespace Toolkit.WinForm
             this.BindResponseBody();
         }
 
-        private void BtnPasteResponse_Click_1(object sender, EventArgs e)
-        {
-            string pasteText = Clipboard.GetText();
-            if (string.IsNullOrEmpty(pasteText))
-            {
-                return;
-            }
-
-            string[] lines = pasteText.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-
-            foreach (var line in lines)
-            {
-                var arr = line.Split(new string[] { "\t" }, StringSplitOptions.RemoveEmptyEntries);
-                if (arr.Count() != 3)
-                {
-                    continue;
-                }
-
-                this.ApiData.ResponseBodys.Add(new ResponseBodyInfo()
-                {
-                    FieldName = arr[0],
-                    FieldCode = arr[1],
-                    DataType = arr[2]
-                });
-
-            }
-
-            this.BindResponseBody();
-        }
 
         private void BtnRemoveResponseBody_Click(object sender, EventArgs e)
         {
