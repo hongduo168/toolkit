@@ -23,6 +23,8 @@ namespace Toolkit.WinForm.ApiDesign.Model
 
         public string ApiName { get; set; }
 
+        public string ApiDesc { get; set; }
+
         /// <summary>
         /// 生成的控制器名称Controller Name
         /// </summary>

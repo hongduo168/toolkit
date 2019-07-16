@@ -5,19 +5,21 @@
 
 
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AdminFrameWork;
 using AdminFrameWork.Constant;
-using AdminFrameWork.Mvc;
+using AdminFrameWork.Modules.User.Service;
+using AdminFrameWork.Mvc.ValueProvider;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using AdminFrameWork.RepositoryPattern;
-using Microsoft.AspNetCore.Http;
+using Plugin.App.Service;
 
 namespace {Namespace}
 {
 
+    [ApiVersion("@(Model.Project.Version).0")]
+    [ApiExplorerSettings(GroupName = "v@(Model.Project.Version)")]
+    [ApiController]
+    [Route(DicKeys.ApiUrlScheme)]
     public partial class @(Model.ApiCode)Controller : Controller
     {
         //protected readonly IService _service;

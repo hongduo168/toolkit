@@ -11,7 +11,7 @@ using AdminFrameWork.Mvc;
 
 namespace {Namespace}
 {
-    public partial class @(Model.ActionName)ResponseModel : AjaxResult
+    public partial class @(Model.ActionName)ResponseModel
     {
 		@foreach (var item in Model.ResponseBodys)
         {

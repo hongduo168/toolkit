@@ -39,19 +39,37 @@ namespace {Namespace}
 					break;
 			}
 
-			var responseType = @Model.ActionName + "ResponseModel";
-		}
+			var responseType = string.Empty;
 
+			if(Model.IsList || Model.IsResultPaging) { 
+				responseType = "IList<"+Model.ActionName+"ResponseModel>";
+			}
+			if(Model.IsResultBool) { 
+				responseType = "Bool";
+			}
+			if(Model.IsResultInt) { 
+				responseType = "int";
+			}
+		}
+		
+        /// <summary>
+        /// @Model.ApiDesc
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
 		[@(actionMethod)("@Model.ActionRoute")]
-        public @responseType @(Model.ActionName)(@paramsFrom@(Model.ActionName)RequestModel request)
+        public AjaxResult<@responseType> @(Model.ActionName)(@paramsFrom@(Model.ActionName)RequestModel request)
         {
+			var resp = new AjaxResult<@responseType>() { Status = AjaxStatus.Normal };
             try
             {
-                return new @(responseType)() { Status = AjaxStatus.Normal };
+                return resp;
             }
             catch (Exception)
             {
-                return new @(responseType)() { Status = AjaxStatus.Error, Message = "服务器繁忙，请稍后重试！" };
+				resp.Status = AjaxStatus.Error;
+				resp.Message = "服务器繁忙，请稍后重试！";
+                return resp;
             }
         }
     }

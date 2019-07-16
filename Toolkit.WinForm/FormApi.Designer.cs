@@ -54,6 +54,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.tbActionMethod = new System.Windows.Forms.ComboBox();
+            this.tbDesc = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRequsetBody)).BeginInit();
@@ -82,7 +84,7 @@
             this.tbActionName.Location = new System.Drawing.Point(86, 44);
             this.tbActionName.Name = "tbActionName";
             this.tbActionName.Size = new System.Drawing.Size(167, 21);
-            this.tbActionName.TabIndex = 3;
+            this.tbActionName.TabIndex = 5;
             this.tbActionName.Leave += new System.EventHandler(this.TbActionName_Leave);
             // 
             // label2
@@ -100,7 +102,7 @@
             this.tbRoute.Multiline = true;
             this.tbRoute.Name = "tbRoute";
             this.tbRoute.Size = new System.Drawing.Size(167, 21);
-            this.tbRoute.TabIndex = 5;
+            this.tbRoute.TabIndex = 6;
             // 
             // label3
             // 
@@ -301,7 +303,7 @@
             this.tbApiCode.Location = new System.Drawing.Point(339, 12);
             this.tbApiCode.Name = "tbApiCode";
             this.tbApiCode.Size = new System.Drawing.Size(167, 21);
-            this.tbApiCode.TabIndex = 23;
+            this.tbApiCode.TabIndex = 2;
             // 
             // label4
             // 
@@ -333,13 +335,31 @@
             this.tbActionMethod.Location = new System.Drawing.Point(612, 12);
             this.tbActionMethod.Name = "tbActionMethod";
             this.tbActionMethod.Size = new System.Drawing.Size(121, 20);
-            this.tbActionMethod.TabIndex = 25;
+            this.tbActionMethod.TabIndex = 3;
+            // 
+            // tbDesc
+            // 
+            this.tbDesc.Location = new System.Drawing.Point(612, 44);
+            this.tbDesc.Name = "tbDesc";
+            this.tbDesc.Size = new System.Drawing.Size(167, 21);
+            this.tbDesc.TabIndex = 8;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(544, 48);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(65, 12);
+            this.label6.TabIndex = 26;
+            this.label6.Text = "接口描述：";
             // 
             // FormApi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 467);
+            this.Controls.Add(this.tbDesc);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.tbActionMethod);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.tbApiCode);
@@ -395,5 +415,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox tbActionMethod;
+        private System.Windows.Forms.TextBox tbDesc;
+        private System.Windows.Forms.Label label6;
     }
 }
