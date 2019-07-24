@@ -147,6 +147,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="db.sql" />
     <Content Include="templates\constructor.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

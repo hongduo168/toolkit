@@ -3,9 +3,14 @@
 **生成时间：@DateTime.Now
 */
 
-import { get, post, put, delete } from "./request";
+import { get, post, put, d } from "./request";
 
 @foreach(var item in Model.ApiInterfaces){
+
+	if(item.ActionMethod.ToLower() == "delete") {
+		item.ActionMethod = "d";
+	}
+
 @:export async function @item.ApiCode.ToLower()@(item.ActionName)(params) {
   @:return @(item.ActionMethod.ToLower())("/api/@item.ApiCode/@item.ActionRoute", params);
 @:}
