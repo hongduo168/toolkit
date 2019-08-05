@@ -23,7 +23,10 @@ namespace Toolkit.WinForm.ApiDesign.Model
 
         public string ApiName { get; set; }
 
-        public string ApiDesc { get; set; }
+        /// <summary>
+        /// 是否需要登录授权
+        /// </summary>
+        public bool IsAuthorize { get; set; }
 
         /// <summary>
         /// 生成的控制器名称Controller Name

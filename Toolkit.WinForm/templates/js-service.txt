@@ -10,8 +10,16 @@ import { get, post, put, d } from "./request";
 	if(item.ActionMethod.ToLower() == "delete") {
 		item.ActionMethod = "d";
 	}
+	
+	if(item.ActionRoute.Contains("{id}")) {
+		item.ActionRoute = item.ActionRoute.Replace("{id}", "${id}");
+		@:export async function @item.ApiCode.ToLower()@(item.ActionName)(id, params) {
+		  @:return @(item.ActionMethod.ToLower())(`/api/v1/@item.ActionRoute`, params);
+		@:}
+	} else {
+		@:export async function @item.ApiCode.ToLower()@(item.ActionName)(params) {
+		  @:return @(item.ActionMethod.ToLower())("/api/v1/@item.ApiCode/@item.ActionRoute", params);
+		@:}
+	}
 
-@:export async function @item.ApiCode.ToLower()@(item.ActionName)(params) {
-  @:return @(item.ActionMethod.ToLower())("/api/@item.ApiCode/@item.ActionRoute", params);
-@:}
 }

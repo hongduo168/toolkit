@@ -54,8 +54,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.tbActionMethod = new System.Windows.Forms.ComboBox();
-            this.tbDesc = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.chkLogin = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRequsetBody)).BeginInit();
@@ -337,13 +337,6 @@
             this.tbActionMethod.Size = new System.Drawing.Size(121, 20);
             this.tbActionMethod.TabIndex = 3;
             // 
-            // tbDesc
-            // 
-            this.tbDesc.Location = new System.Drawing.Point(612, 44);
-            this.tbDesc.Name = "tbDesc";
-            this.tbDesc.Size = new System.Drawing.Size(167, 21);
-            this.tbDesc.TabIndex = 8;
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -353,12 +346,23 @@
             this.label6.TabIndex = 26;
             this.label6.Text = "接口描述：";
             // 
+            // chkLogin
+            // 
+            this.chkLogin.AccessibleName = "responseType";
+            this.chkLogin.AutoSize = true;
+            this.chkLogin.Location = new System.Drawing.Point(612, 47);
+            this.chkLogin.Name = "chkLogin";
+            this.chkLogin.Size = new System.Drawing.Size(72, 16);
+            this.chkLogin.TabIndex = 27;
+            this.chkLogin.Text = "登录认证";
+            this.chkLogin.UseVisualStyleBackColor = true;
+            // 
             // FormApi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 467);
-            this.Controls.Add(this.tbDesc);
+            this.Controls.Add(this.chkLogin);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.tbActionMethod);
             this.Controls.Add(this.label5);
@@ -415,7 +419,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox tbActionMethod;
-        private System.Windows.Forms.TextBox tbDesc;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.CheckBox chkLogin;
     }
 }

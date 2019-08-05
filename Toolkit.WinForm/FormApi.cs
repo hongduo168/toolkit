@@ -73,7 +73,7 @@ namespace Toolkit.WinForm
             else
             {
                 this.tbName.Text = this.ApiData.ApiName;
-                this.tbDesc.Text = this.ApiData.ApiDesc;
+                this.chkLogin.Checked = this.ApiData.IsAuthorize;
                 this.tbApiCode.Text = this.ApiData.ApiCode;
                 this.tbActionName.Text = this.ApiData.ActionName;
                 if (string.IsNullOrEmpty(this.ApiData.ActionMethod))
@@ -247,7 +247,7 @@ namespace Toolkit.WinForm
         {
             btnSave.Enabled = false;
             this.ApiData.ApiName = tbName.Text.Trim();
-            this.ApiData.ApiDesc = tbDesc.Text.Trim();
+            this.ApiData.IsAuthorize = chkLogin.Checked;
             this.ApiData.ApiCode = tbApiCode.Text.Trim();
             this.ApiData.ActionName = tbActionName.Text.Trim();
             this.ApiData.ActionMethod = tbActionMethod.Text.Trim();
@@ -261,7 +261,6 @@ namespace Toolkit.WinForm
             //处理null值
             this.ApiData.LastDateTime = DateTime.Now;
             if (this.ApiData.ApiName == null) this.ApiData.ApiName = string.Empty;
-            if (this.ApiData.ApiDesc == null) this.ApiData.ApiDesc = string.Empty;
             if (this.ApiData.ApiCode == null) this.ApiData.ApiCode = string.Empty;
             if (this.ApiData.ActionName == null) this.ApiData.ActionName = string.Empty;
             if (this.ApiData.ActionMethod == null) this.ApiData.ActionMethod = string.Empty;

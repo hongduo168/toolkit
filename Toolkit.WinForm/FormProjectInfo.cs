@@ -246,7 +246,7 @@ namespace Toolkit.WinForm
                     AppDomain.CurrentDomain.BaseDirectory + "/templates/request_body.txt",
                     apiData,
                     string.Format("{0}.ViewModel.{1}", this.Project.Namespace, apiData.ApiCode),
-                    Path.Combine(apiData.ApiCode + apiData.ActionName, apiData.ActionName + "RequestModel.cs"));
+                    Path.Combine(apiData.ApiCode, apiData.ActionName, apiData.ActionName + "RequestModel.cs"));
                 razor.Render();
 
 
@@ -255,7 +255,7 @@ namespace Toolkit.WinForm
                     AppDomain.CurrentDomain.BaseDirectory + "/templates/response_body.txt",
                     apiData,
                     string.Format("{0}.ViewModel.{1}", this.Project.Namespace, apiData.ApiCode),
-                    Path.Combine(apiData.ApiCode + apiData.ActionName, apiData.ActionName + "ResponseModel.cs"));
+                    Path.Combine(apiData.ApiCode, apiData.ActionName, apiData.ActionName + "ResponseModel.cs"));
                 razor.Render();
 
                 //创建service
@@ -263,7 +263,7 @@ namespace Toolkit.WinForm
                    AppDomain.CurrentDomain.BaseDirectory + "/templates/controller.txt",
                    apiData,
                    string.Format("{0}.Controllers.v{1}", this.Project.Namespace, this.Project.Version),
-                   Path.Combine(apiData.ApiCode + apiData.ActionName, apiData.ActionName + ".cs"));
+                   Path.Combine(apiData.ApiCode, apiData.ActionName, apiData.ActionName + ".cs"));
                 razor.Render();
 
 
@@ -272,7 +272,7 @@ namespace Toolkit.WinForm
                    AppDomain.CurrentDomain.BaseDirectory + "/templates/constructor.txt",
                    apiData,
                    string.Format("{0}.Controllers.v{1}", this.Project.Namespace, this.Project.Version),
-                   (apiData.ApiCode + "Controller.cs"));
+                   Path.Combine(apiData.ApiCode, "Controller.cs"));
                 razor.Render(false);
             }
             catch (Exception ex)

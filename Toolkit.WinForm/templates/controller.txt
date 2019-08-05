@@ -14,6 +14,7 @@ using AdminFrameWork.Mvc;
 using Microsoft.AspNetCore.Mvc;
 using AdminFrameWork.RepositoryPattern;
 using Microsoft.AspNetCore.Http;
+using AdminFrameWork.Mvc.Authorize;
 using @(Model.Project.Namespace).ViewModel.@Model.ApiCode;
 
 namespace {Namespace}
@@ -45,20 +46,25 @@ namespace {Namespace}
 				responseType = "IList<"+Model.ActionName+"ResponseModel>";
 			}
 			if(Model.IsResultBool) { 
-				responseType = "Bool";
+				responseType = "bool";
 			}
 			if(Model.IsResultInt) { 
 				responseType = "int";
 			}
+
+			var param_id = "";
+			if(@Model.ActionRoute.Contains("{id}")) {
+				param_id = "int id, ";
+			}
 		}
 		
         /// <summary>
-        /// @Model.ApiDesc
+        /// @Model.ApiName
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-		[@(actionMethod)("@Model.ActionRoute")]
-        public AjaxResult<@responseType> @(Model.ActionName)(@paramsFrom@(Model.ActionName)RequestModel request)
+		[@(Model.IsAuthorize ? "UserAuthorize, " : "")@(actionMethod)("@Model.ActionRoute")]
+        public AjaxResult<@responseType> @(Model.ActionName)(@param_id@paramsFrom@(Model.ActionName)RequestModel request)
         {
 			var resp = new AjaxResult<@responseType>() { Status = AjaxStatus.Normal };
             try

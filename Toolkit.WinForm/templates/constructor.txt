@@ -19,7 +19,7 @@ namespace {Namespace}
     [ApiVersion("@(Model.Project.Version).0")]
     [ApiExplorerSettings(GroupName = "v@(Model.Project.Version)")]
     [ApiController]
-    [Route(DicKeys.ApiUrlScheme)]
+    [Route(DicKeys.ApiUrlPrefix)]
     public partial class @(Model.ApiCode)Controller : Controller
     {
         //protected readonly IService _service;
