@@ -22,6 +22,7 @@ namespace {Namespace}
 			@:/// @item.FieldName
 			@:/// </summary>
 			@:/// <value></value>
+			@:[JsonProperty("@item.FieldCode.ToLower()")]
 			@:public @item.DataType @item.FieldCode { get; set; }
 			@:
 		}

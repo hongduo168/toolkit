@@ -57,26 +57,30 @@ namespace {Namespace}
 				param_id = "int id, ";
 			}
 		}
-		
-        /// <summary>
+
+		/// <summary>
         /// @Model.ApiName
         /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
+        /// <response code="200">OK</response>
+        /// <response code="400">Bad request</response>
+        /// <response code="401">Unauthorized</response>
 		[@(Model.IsAuthorize ? "UserAuthorize, " : "")@(actionMethod)("@Model.ActionRoute")]
-        public AjaxResult<@responseType> @(Model.ActionName)(@param_id@paramsFrom@(Model.ActionName)RequestModel request)
+        //[ProducesResponseType(typeof(CustomersRootObject), (int)HttpStatusCode.OK)]
+        //[ProducesResponseType(typeof(ErrorsRootObject), (int)HttpStatusCode.BadRequest)]
+        //[ProducesResponseType(typeof(string), (int)HttpStatusCode.Unauthorized)]
+        [GetRequestsErrorInterceptorActionFilter]
+		public IActionResult @(Model.ActionName)(@param_id@paramsFrom@(Model.ActionName)RequestModel request)
         {
-			var resp = new AjaxResult<@responseType>() { Status = AjaxStatus.Normal };
+			var resp = new @responseType() { };
             try
             {
-                return resp;
+
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-				resp.Status = AjaxStatus.Error;
-				resp.Message = "服务器繁忙，请稍后重试！";
-                return resp;
+
             }
+			return RawJsonResult(resp);
         }
     }
 }
