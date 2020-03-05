@@ -4,29 +4,24 @@
 */
 
 
-
-using AdminFrameWork;
-using AdminFrameWork.Constant;
-using AdminFrameWork.Modules.User.Service;
-using AdminFrameWork.Mvc.ValueProvider;
-using Microsoft.AspNetCore.Hosting;
+using System.Net;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
-using Plugin.App.Service;
+using Nop.Plugin.Api.Attributes;
 
 namespace {Namespace}
 {
 
-    [ApiVersion("@(Model.Project.Version).0")]
-    [ApiExplorerSettings(GroupName = "v@(Model.Project.Version)")]
-    [ApiController]
-    [Route(DicKeys.ApiUrlPrefix)]
-    public partial class @(Model.ApiCode)Controller : Controller
-    {
-        //protected readonly IService _service;
+    [ApiAuthorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 
-        public @(Model.ApiCode)Controller()
+    public partial class @(Model.ApiCode)Controller  : BaseApiController
+    {
+	 
+	 //protected readonly IService _service;
+	       
+        public @(Model.ApiCode)Controller() : base()
         {
-            //_service = service;
+		 //_service = service;
         }
 	}
 }

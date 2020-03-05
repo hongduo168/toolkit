@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AdminFrameWork.Mvc;
+using Nop.Core;
 
 namespace {Namespace}
 {
@@ -22,7 +22,6 @@ namespace {Namespace}
 			@:/// @item.FieldName
 			@:/// </summary>
 			@:/// <value></value>
-			@:[JsonProperty("@item.FieldCode.ToLower()")]
 			@:public @item.DataType @item.FieldCode { get; set; }
 			@:
 		}
