@@ -245,7 +245,7 @@ namespace Toolkit.WinForm
                 var razor = new TemplateBuilder<object>(
                     AppDomain.CurrentDomain.BaseDirectory + "/templates/request_body.txt",
                     apiData,
-                    string.Format("{0}.ViewModel.{1}", this.Project.Namespace, apiData.ApiCode),
+                    string.Format("{0}.Controllers.v{1}.Models", this.Project.Namespace, this.Project.Version),
                     Path.Combine(apiData.ApiCode, apiData.ActionName, apiData.ActionName + "RequestModel.cs"));
                 razor.Render();
 
@@ -254,7 +254,7 @@ namespace Toolkit.WinForm
                 razor = new TemplateBuilder<object>(
                     AppDomain.CurrentDomain.BaseDirectory + "/templates/response_body.txt",
                     apiData,
-                    string.Format("{0}.ViewModel.{1}", this.Project.Namespace, apiData.ApiCode),
+                    string.Format("{0}.Controllers.v{1}.Models", this.Project.Namespace, this.Project.Version),
                     Path.Combine(apiData.ApiCode, apiData.ActionName, apiData.ActionName + "ResponseModel.cs"));
                 razor.Render();
 

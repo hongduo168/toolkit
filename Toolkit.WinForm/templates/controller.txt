@@ -6,16 +6,19 @@
 
 
 using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Nop.Api.Infrastructure.ModelBase;
 using Nop.Core;
-using Nop.Plugin.Api.Attributes;
-using Nop.Plugin.Api.Controllers.ViewModel.@(Model.ApiCode);
+using Nop.Web.Controllers;
+using {Namespace}.Models;
 
 namespace {Namespace}
 {
 
-    public partial class @(Model.ApiCode)Controller : BaseApiController
+    public partial class @(Model.ApiCode)Controller : BasePublicController
     {
 		@{
 			var actionMethod = "HttpGet";
@@ -38,7 +41,7 @@ namespace {Namespace}
 			var responseType = string.Empty;
 
 			if(Model.IsList || Model.IsResultPaging) { 
-				responseType = "IList<"+Model.ActionName+"ResponseModel>";
+				responseType = "List<"+Model.ActionName+"ResponseModel>";
 			}
 			if(Model.IsResultBool) { 
 				responseType = "bool";
@@ -52,9 +55,9 @@ namespace {Namespace}
 				param_id = "int id, ";
 			}
 
-			var apiAuthorize = "[ApiAuthorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]";
+			var apiAuthorize = "";
 			if(Model.IsAuthorize) {
-				apiAuthorize = "[ApiAuthorize(Policy = JwtBearerDefaults.AuthenticationScheme, AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]";
+				apiAuthorize = "[Authorize]";
 			}
 		}
 
@@ -66,23 +69,19 @@ namespace {Namespace}
         /// <response code="401">Unauthorized</response>
 		[@(actionMethod)("@Model.ActionRoute")]
         @(apiAuthorize)
-        //[ProducesResponseType(typeof(CustomersRootObject), (int)HttpStatusCode.OK)]
-        //[ProducesResponseType(typeof(ErrorsRootObject), (int)HttpStatusCode.BadRequest)]
-        //[ProducesResponseType(typeof(string), (int)HttpStatusCode.Unauthorized)]
-        [GetRequestsErrorInterceptorActionFilter]
-		public IActionResult @(Model.ActionName)(@param_id@paramsFrom@(Model.ActionName)RequestModel request)
+		public AjaxResult<@responseType> @(Model.ActionName)(@param_id@paramsFrom@(Model.ActionName)RequestModel request)
         {
-			var resp = new AjaxResult<@responseType>() { Status = AjaxStatus.Normal };
+			var resp = new AjaxResult<@responseType>() { Status = AjaxStatus.Success };
             try
             {
             }
             catch (Exception)
             {
-				resp.Status = AjaxStatus.Error;
-				resp.Message = "服务器繁忙，请稍后重试！";
+                resp.Status = AjaxStatus.ServerError;
+                resp.Message = "服务器繁忙，请稍后重试！";
             }
 			
-			return RawJsonResult(resp);
+			return resp;
 
         }
     }

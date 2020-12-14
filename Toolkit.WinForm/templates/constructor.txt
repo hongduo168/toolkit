@@ -12,6 +12,7 @@ using Nop.Plugin.Api.Attributes;
 namespace {Namespace}
 {
 
+    [ApiVersion("1.0")]
     [ApiAuthorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 
     public partial class @(Model.ApiCode)Controller  : BaseApiController
