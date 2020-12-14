@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Nop.Api.Infrastructure.ModelBase;
 using Nop.Core;
 using Nop.Web.Controllers;
-using {Namespace}.Models;
+using Nop.Api.Models.v1;
 
 namespace {Namespace}
 {
@@ -38,7 +38,7 @@ namespace {Namespace}
 					break;
 			}
 
-			var responseType = string.Empty;
+			var responseType = "Object";
 
 			if(Model.IsList || Model.IsResultPaging) { 
 				responseType = "List<"+Model.ActionName+"ResponseModel>";
