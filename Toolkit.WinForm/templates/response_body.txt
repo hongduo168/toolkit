@@ -9,9 +9,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Nop.Core;
 
-namespace {Namespace}
+namespace {Namespace}.Models.v{Version}
 {
-    public partial class @(Model.ActionName)ResponseModel
+    public partial class @(Model.ApiCode)@(Model.ActionName)ResponseModel
     {
 		@foreach (var item in Model.ResponseBodys)
         {

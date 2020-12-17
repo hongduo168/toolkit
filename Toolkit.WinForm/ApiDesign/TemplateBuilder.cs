@@ -16,14 +16,17 @@ namespace Toolkit.WinForm.ApiDesign
 
         public string Namespace { get; set; }
 
+        public string Version { get; set; }
+
         public string OutputPath { get; set; }
 
 
-        public TemplateBuilder(string templatePath, T renderData, string @namespace, string outputPath)
+        public TemplateBuilder(string templatePath, T renderData, string @namespace, string version, string outputPath)
         {
             this.RenderData = renderData;
             this.Namespace = @namespace;
             this.OutputPath = outputPath;
+            this.Version = version;
             this.TemplatePath = templatePath;
         }
 
@@ -44,6 +47,7 @@ namespace Toolkit.WinForm.ApiDesign
             var template = System.IO.File.ReadAllText(this.TemplatePath);
             var result = Razor.Parse<T>(template, this.RenderData)
                 .Replace("{Namespace}", Namespace)
+                .Replace("{Version}", Version)
                 .Replace("&gt;", ">")
                 .Replace("&lt;", "<")
                 .Replace("&quot;", "\"")

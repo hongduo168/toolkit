@@ -9,18 +9,18 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Nop.Web.Controllers;
 
-namespace {Namespace}
+namespace {Namespace}.Controllers.v{Version}
 {
 
     [ApiVersion("1.0")]
     public partial class @(Model.ApiCode)Controller  : BasePublicController
     {
 	 
-	 //protected readonly IService _service;
+	    //protected readonly IService _service;
 	       
         public @(Model.ApiCode)Controller() : base()
         {
-		 //_service = service;
+		    //_service = service;
         }
 	}
 }

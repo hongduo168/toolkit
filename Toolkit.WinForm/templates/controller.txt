@@ -10,12 +10,12 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Nop.Api.Infrastructure.ModelBase;
+using {Namespace}.Infrastructure.ModelBase;
 using Nop.Core;
 using Nop.Web.Controllers;
-using Nop.Api.Models.v1;
+using {Namespace}.Models.v{Version};
 
-namespace {Namespace}
+namespace {Namespace}.Controllers.v{Version}
 {
 
     public partial class @(Model.ApiCode)Controller : BasePublicController
@@ -38,10 +38,10 @@ namespace {Namespace}
 					break;
 			}
 
-			var responseType = "Object";
+			var responseType = Model.ResponseBodys.Count == 0 ? "object" : Model.ApiCode+Model.ActionName+"ResponseModel";
 
 			if(Model.IsList || Model.IsResultPaging) { 
-				responseType = "List<"+Model.ActionName+"ResponseModel>";
+				responseType = "List<"+Model.ApiCode+Model.ActionName+"ResponseModel>";
 			}
 			if(Model.IsResultBool) { 
 				responseType = "bool";
@@ -69,7 +69,7 @@ namespace {Namespace}
         /// <response code="401">Unauthorized</response>
 		[@(actionMethod)("@Model.ActionRoute")]
         @(apiAuthorize)
-		public AjaxResult<@responseType> @(Model.ActionName)(@param_id@paramsFrom@(Model.ActionName)RequestModel request)
+		public AjaxResult<@responseType> @(Model.ActionName)(@param_id@paramsFrom@(Model.ApiCode+Model.ActionName)RequestModel request)
         {
 			var resp = new AjaxResult<@responseType>() { Status = AjaxStatus.Success };
             try

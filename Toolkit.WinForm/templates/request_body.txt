@@ -8,11 +8,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Nop.Core;
-using Nop.Api.Infrastructure.ModelBase;
+using {Namespace}.Infrastructure.ModelBase;
 
-namespace {Namespace}
+namespace {Namespace}.Models.v{Version}
 {
-    public partial class @(Model.ActionName)RequestModel : AjaxRequest
+    public partial class @(Model.ApiCode)@(Model.ActionName)RequestModel : AjaxRequest
     {
 		@foreach (var item in Model.RequestBodys) 
 		{

@@ -245,7 +245,8 @@ namespace Toolkit.WinForm
                 var razor = new TemplateBuilder<object>(
                     AppDomain.CurrentDomain.BaseDirectory + "/templates/request_body.txt",
                     apiData,
-                    string.Format("{0}.Models.v{1}", this.Project.Namespace, this.Project.Version),
+                    Project.Namespace,
+                    Project.Version,
                     Path.Combine(apiData.ApiCode, apiData.ActionName, apiData.ActionName + "RequestModel.cs"));
                 razor.Render();
 
@@ -254,25 +255,28 @@ namespace Toolkit.WinForm
                 razor = new TemplateBuilder<object>(
                     AppDomain.CurrentDomain.BaseDirectory + "/templates/response_body.txt",
                     apiData,
-                    string.Format("{0}.Models.v{1}", this.Project.Namespace, this.Project.Version),
+                    Project.Namespace,
+                    Project.Version,
                     Path.Combine(apiData.ApiCode, apiData.ActionName, apiData.ActionName + "ResponseModel.cs"));
                 razor.Render();
 
                 //创建service
                 razor = new TemplateBuilder<object>(
-                   AppDomain.CurrentDomain.BaseDirectory + "/templates/controller.txt",
-                   apiData,
-                   string.Format("{0}.Controllers.v{1}", this.Project.Namespace, this.Project.Version),
-                   Path.Combine(apiData.ApiCode, apiData.ActionName, apiData.ActionName + ".cs"));
+                    AppDomain.CurrentDomain.BaseDirectory + "/templates/controller.txt",
+                    apiData,
+                    Project.Namespace,
+                    Project.Version,
+                    Path.Combine(apiData.ApiCode, apiData.ActionName, apiData.ActionName + ".cs"));
                 razor.Render();
 
 
                 //创建构造函数
                 razor = new TemplateBuilder<object>(
-                   AppDomain.CurrentDomain.BaseDirectory + "/templates/constructor.txt",
-                   apiData,
-                   string.Format("{0}.Controllers.v{1}", this.Project.Namespace, this.Project.Version),
-                   Path.Combine(apiData.ApiCode, "Controller.cs"));
+                    AppDomain.CurrentDomain.BaseDirectory + "/templates/constructor.txt",
+                    apiData,
+                    Project.Namespace,
+                    Project.Version,
+                    Path.Combine(apiData.ApiCode, apiData.ApiCode + "Controller.cs"));
                 razor.Render(false);
             }
             catch (Exception ex)
@@ -297,7 +301,8 @@ namespace Toolkit.WinForm
                 var razor = new TemplateBuilder<object>(
                     AppDomain.CurrentDomain.BaseDirectory + "/templates/js-service.txt",
                     project,
-                    string.Empty,
+                    project.Namespace,
+                    project.Version,
                     (project.Namespace.ToLower().Replace(".", "_") + "_service.js"));
                 razor.Render();
 
